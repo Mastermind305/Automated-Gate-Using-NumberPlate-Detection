@@ -1,0 +1,20 @@
+INFO:__main__:Successfully connected to MongoDB
+INFO:__main__:Successfully loaded YOLO model
+ * Serving Flask app 'app'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on d
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+Traceback (most recent call last):
+  File "/home/aayush/Desktop/flask/app.py", line 52, in <module>
+    GPIO.setup(LED_PIN, GPIO.OUT) 
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aayush/Desktop/myenv/lib/python3.11/site-packages/RPi/GPIO/__init__.py", line 704, in setup
+    initial = _check(lgpio.gpio_read(_chip, gpio))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aayush/Desktop/myenv/lib/python3.11/site-packages/lgpio.py", line 903, in gpio_read
+    return _u2i(_lgpio._gpio_read(handle&0xffff, gpio))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aayush/Desktop/myenv/lib/python3.11/site-packages/lgpio.py", line 458, in _u2i
+    raise error(error_text(v))
+lgpio.error: 'GPIO not allocated'

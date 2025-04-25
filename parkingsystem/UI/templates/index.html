@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .btn-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-6 text-yellow-300 shadow-text">Vehicle Registration System</h1>
+            <button id="register-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition duration-300 ease-in-out btn-hover">
+                View Registered Vehicles
+            </button>
+        </header>
+
+        <div id="error-message" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6 hidden" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline" id="error-text"></span>
+        </div>
+
+        <div id="loading" class="text-center text-white text-2xl hidden">
+            <svg class="animate-spin h-10 w-10 mr-3 inline-block" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Processing...
+        </div>
+
+        <div id="results-container" class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle No</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number Plate</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Entry Time</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body" class="bg-white divide-y divide-gray-200">
+                    <!-- Results will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('register-btn').addEventListener('click', async () => {
+            const errorMessageElement = document.getElementById('error-message');
+            const errorTextElement = document.getElementById('error-text');
+            const resultsBody = document.getElementById('results-body');
+            const loadingElement = document.getElementById('loading');
+            
+            errorMessageElement.classList.add('hidden');
+            resultsBody.innerHTML = '';
+            loadingElement.classList.remove('hidden');
+            
+            try {
+                const response = await fetch('/get_images');
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${result.error || 'Unknown error'}`);
+                }
+
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+
+                if (result.length === 0) {
+                    throw new Error('No vehicles found.');
+                }
+
+                result.forEach(vehicle => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${vehicle.vehicle_no}</div>
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${vehicle.numberplate}</div>
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${new Date(vehicle.entry_time).toLocaleString()}</div>
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap">
+                            <img src="data:image/jpeg;base64,${vehicle.processed_image}" alt="Processed image" class="h-20 w-auto">
+                        </td>
+                    `;
+                    resultsBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                errorTextElement.textContent = error.message;
+                errorMessageElement.classList.remove('hidden');
+            } finally {
+                loadingElement.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
+
+

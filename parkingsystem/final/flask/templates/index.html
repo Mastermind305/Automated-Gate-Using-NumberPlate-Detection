@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Plate Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background-images">
+        <img src="{{ url_for('static', filename='nepali_plate_1.jpg') }}" alt="Nepali number plate background 1">
+        <img src="{{ url_for('static', filename='nepali_plate_2.jpg') }}" alt="Nepali number plate background 2">
+        <img src="{{ url_for('static', filename='nepali_plate_3.jpg') }}" alt="Nepali number plate background 3">
+        <img src="{{ url_for('static', filename='nepali_plate_4.jpg') }}" alt="Nepali number plate background 4">
+    </div>
+    <h1>Number Plate Detection</h1>
+    <div class="button-container">
+        <button id="video-btn" class="button">Video</button>
+        <button id="create-btn" class="button">Create</button>
+        <button id="update-btn" class="button">Update</button>
+        <button id="delete-btn" class="button">Delete</button>
+    </div>
+
+    <!-- Live Webcam Feed Section -->
+    <div class="video-container" id="live-feed-container" style="margin-top: 2rem; display: none;">
+        <h2>Live Webcam Feed</h2>
+        <img src="/video_feed" alt="Live video feed not available" id="live-feed" 
+             style="border: 2px solid white; border-radius: 10px; width: 80%; max-width: 640px;">
+    </div>
+
+    <script>
+        // Show the live feed when the "Video" button is clicked
+        document.getElementById('video-btn').addEventListener('click', function() {
+            const liveFeedContainer = document.getElementById('live-feed-container');
+            liveFeedContainer.style.display = 'block'; // Make the live feed container visible
+            liveFeedContainer.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to the live feed
+        });
+
+        // Alert functionality for the other buttons
+        document.querySelectorAll('.button:not(#video-btn)').forEach(button => {
+            button.addEventListener('click', function() {
+                alert(`You clicked the ${this.textContent} button!`);
+            });
+        });
+    </script>
+</body>
+</html>

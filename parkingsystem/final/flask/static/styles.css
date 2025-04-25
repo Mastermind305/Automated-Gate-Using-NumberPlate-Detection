@@ -1,0 +1,75 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #1a365d, #4a148c, #880e4f);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    overflow-x: hidden;
+}
+
+.background-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.background-images img {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
+
+.background-images img:nth-child(1) { top: 0; left: 0; }
+.background-images img:nth-child(2) { top: 0; right: 0; }
+.background-images img:nth-child(3) { bottom: 0; left: 0; }
+.background-images img:nth-child(4) { bottom: 0; right: 0; }
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 1rem;
+}
+
+.button {
+    height: 120px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#video-btn { background: linear-gradient(to right, #4299e1, #3182ce); }
+#create-btn { background: linear-gradient(to right, #48bb78, #38a169); }
+#update-btn { background: linear-gradient(to right, #ecc94b, #d69e2e); }
+#delete-btn { background: linear-gradient(to right, #f56565, #e53e3e); }
