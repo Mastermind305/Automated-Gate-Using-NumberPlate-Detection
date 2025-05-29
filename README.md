@@ -44,7 +44,7 @@ The project is split into two interfaces:
 | Task                      | Model     | Dataset Size      | mAP Score |
 |---------------------------|-----------|--------------------|-----------|
 | License Plate Detection   | YOLOv8    | 12,277 images      | 98.8%     |
-| Character Detection       | YOLOv11   | 936 plate images   | 94.5%     |
+| Character Detection       | YOLOv11   | 2674 plate images   | 94.5%     |
 
 ## 🧪 Methodology
 
