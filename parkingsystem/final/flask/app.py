@@ -151,7 +151,7 @@ def cache_with_timeout(timeout_ms=100):
 app = Flask(__name__)
 
 # MongoDB connection URI
-uri = "mongodb+srv://ag07121321:5G31a9kHwjf5dE6b@cluster0.byjk3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = ""
 
 # Create a new client and connect to the server
 try:
@@ -397,3 +397,4 @@ if __name__ == '__main__':
     finally:
         GPIO.cleanup() 
         camera.release()
+
