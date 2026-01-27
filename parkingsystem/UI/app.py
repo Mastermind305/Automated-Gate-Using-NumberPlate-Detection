@@ -18,7 +18,7 @@
 # logging.basicConfig(level=logging.DEBUG)
 
 # # MongoDB connection
-# uri = "mongodb+srv://ag07121321:5G31a9kHwjf5dE6b@cluster0.byjk3.mongodb.net/"
+# uri = ""
 # client = MongoClient(uri, server_api=ServerApi('1'))
 # db = client['your_database_name']
 # fs = gridfs.GridFS(db)
@@ -308,6 +308,7 @@ def download_image(image_id):
 
 if __name__ == "__main__":
     app.run(debug=True)    
+
 
 
 
