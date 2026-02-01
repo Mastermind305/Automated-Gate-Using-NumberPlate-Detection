@@ -11,6 +11,11 @@ This system automates the entry of vehicles by:
 - Triggering gate opening via GPIO using a relay and linear actuator.
 - Displaying detection logs on a user-friendly UI.
 
+
+## Demo video
+
+https://github.com/user-attachments/assets/08e08714-c234-4f7e-aeb5-f700cf73971e
+
 ## 🎯 Objectives
 
 - 🔍 **License Plate Detection** using YOLOv8.
